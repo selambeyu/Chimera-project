@@ -1,0 +1,25 @@
+.cursor/
+.cursor
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment and secrets
+.env
+.env.local
+*.local
+
+# IDE
+.idea/
+*.swp
+*.swo
