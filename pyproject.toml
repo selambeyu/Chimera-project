@@ -1,16 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "chimera"
 version = "0.1.0"
 description = "Chimera – Python + PostgreSQL application (10 Academy)"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "psycopg[binary]>=3.1,<4",
-]
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["skills*"]
+exclude = ["specs*", "research*", "tests*"]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
     "pytest-cov>=4.0.0",
     "python-dotenv>=1.0.0",
 ]
@@ -18,6 +26,7 @@ dev = [
 [dependency-groups]
 dev = [
     "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
     "pytest-cov>=4.0.0",
     "python-dotenv>=1.0.0",
 ]
@@ -25,3 +34,5 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
