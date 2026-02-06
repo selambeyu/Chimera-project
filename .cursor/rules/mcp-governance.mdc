@@ -1,0 +1,58 @@
+## MCP Governance Rule
+
+**Purpose:** Define repository-level policies for using MCP (Model Context Protocol) servers,
+authentication, secrets handling, approvals, and auditability.
+
+**Scope:** Applies to all developers, CI, and automated agents that configure or use MCP servers
+from this repository (files under `.cursor/`, `.specify/`, CI configs, and related tools).
+
+### Rules
+
+- **Approved MCP Servers:** Only MCP servers explicitly approved in `.cursor/mcp.json` are allowed.
+  Adding or changing an MCP server entry requires a Pull Request, at least one `OWNERS` review,
+  and passing CI checks that validate the `mcp.json` schema.
+
+- **No Secrets in Repo:** Absolute prohibition on committing raw secrets (PATs, tokens, private keys).
+  Use environment variables, GitHub Secrets, or a secret manager. Config files MAY contain
+  placeholders or secret references only (e.g., `{{MCP_GITHUB_TOKEN}}`).
+
+- **Scoped Credentials:** Tokens exposed to MCP tooling must use least-privilege scopes necessary
+  for the task. Prefer short-lived tokens or limited-scope app installations.
+
+- **Audit & Connection Log:** Every approved MCP server and token rotation MUST be recorded in
+  `CONNECTION_LOG.md` with approver, date, and purpose. MCP actions in CI or agents should
+  include correlation IDs and write to the project's audit logs where available.
+
+- **Header & Metadata Policy:** MCP requests MUST include identifying headers (e.g., `X-Device`,
+  `X-Coding-Tool`) when feasible. Do not send PII unless explicitly approved in the spec.
+
+- **Token Rotation & Revocation:** Rotate production tokens at least every 90 days. If compromise
+  is suspected, immediately remove the token from active systems, open an urgent PR, and notify
+  repository owners.
+
+- **Emergency Removal:** To remove an MCP server urgently, open a PR marked `urgent`, remove the
+  config, rotate tokens, and notify owners via the project's communication channel.
+
+- **CI Validation:** CI must validate `mcp.json` format and fail builds that introduce raw tokens
+  or malformed MCP entries.
+
+- **Change Process:** Changes to MCP governance (policy text) require a PR and one approver from
+  repository owners; changes to `mcp.json` require the full approval workflow above.
+
+### Example (sanitized) `.cursor/mcp.json` snippet
+
+```jsonc
+{
+  "mcpServers": {
+    "tenxfeedbackanalytics": { "url": "https://mcppulse.10academy.org/proxy" },
+    "github": { "url": "https://api.githubcopilot.com/mcp/", "headers": { "Authorization": "{{MCP_GITHUB_TOKEN}}" } }
+  }
+}
+```
+
+### Related
+- `.cursor/mcp.json` — location for MCP server endpoints and placeholders
+- `CONNECTION_LOG.md` — record of approved MCP connections and rotations
+- `.github/OWNERS` (if present) — required approvers for MCP changes
+
+Keep this policy concise; expand with organization-specific procedures as needed.
