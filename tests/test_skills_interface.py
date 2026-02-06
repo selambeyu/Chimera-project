@@ -4,11 +4,9 @@ Contract: skills/*/README.md and specs/technical.md.
 These tests SHOULD fail until each skill is implemented (NotImplementedError).
 """
 
-import pytest
-
+from skills.skill_download_youtube.download import download_youtube
 from skills.skill_fetch_trends.fetch import fetch_trends
 from skills.skill_transcribe_audio.transcribe import transcribe_audio
-from skills.skill_download_youtube.download import download_youtube
 
 
 def test_fetch_trends_accepts_contract_params() -> None:

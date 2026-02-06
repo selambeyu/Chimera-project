@@ -1,7 +1,7 @@
 # Project Chimera: Master Specification (Meta)
 
-**Document**: High-level vision and constraints  
-**Role**: Source of truth for the Autonomous Influencer Network  
+**Document**: High-level vision and constraints
+**Role**: Source of truth for the Autonomous Influencer Network
 **Last updated**: 2025-02-04
 
 ---
@@ -34,5 +34,7 @@ Project Chimera is an **Autonomous Influencer Network** (AiQEM). It transitions 
 - **specs/functional.md**: User stories and acceptance criteria.
 - **specs/technical.md**: API contracts, database schema, and technical interfaces.
 - **specs/openclaw_integration.md**: Integration with the OpenClaw / Agent Social Network (optional).
+
+**Executable specs:** API contracts (JSON) and Database ERD (Mermaid) are in `specs/technical.md`; OpenClaw protocols are scoped in `specs/openclaw_integration.md`. Tests and skills reference these sections.
 
 All agents and developers MUST resolve intent from `specs/` before writing or changing code.

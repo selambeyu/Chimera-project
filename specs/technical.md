@@ -1,7 +1,7 @@
 # Technical Specification: API Contracts & Database Schema
 
-**Document**: JSON inputs/outputs for agents; ERD for storage  
-**Source**: Project Chimera SRS   
+**Document**: JSON inputs/outputs for agents; ERD for storage
+**Source**: Project Chimera SRS
 **Last updated**: 2025-02-04
 
 ---

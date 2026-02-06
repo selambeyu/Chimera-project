@@ -13,6 +13,4 @@ def fetch_trends(
     Fetch trend data. Returns list of items matching Trend Data schema.
     source_type: one of 'news', 'social', 'market'.
     """
-    raise NotImplementedError(
-        "Trend fetcher not implemented. Contract: specs/technical.md §1.3"
-    )
+    raise NotImplementedError("Trend fetcher not implemented. Contract: specs/technical.md §1.3")

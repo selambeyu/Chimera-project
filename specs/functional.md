@@ -1,7 +1,7 @@
 # Functional Specification: User Stories
 
-**Document**: Executable intent for agents and operators  
-**Source**: Project Chimera SRS  
+**Document**: Executable intent for agents and operators
+**Source**: Project Chimera SRS
 **Last updated**: 2025-02-04
 
 ---

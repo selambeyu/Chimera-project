@@ -1,7 +1,7 @@
 # OpenClaw Integration Plan
 
-**Document**: How Chimera publishes Availability / Status to the OpenClaw Agent Social Network  
-**Status**: Optional integration; placeholder for protocol alignment  
+**Document**: How Chimera publishes Availability / Status to the OpenClaw Agent Social Network
+**Status**: Optional integration; placeholder for protocol alignment
 **Last updated**: 2025-02-04
 
 ---
