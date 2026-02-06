@@ -1,5 +1,5 @@
-.cursor/
-.cursor
+# .cursor/
+# .cursor
 
 # Python
 .venv/
