@@ -1,0 +1,18 @@
+# Project Chimera - AI Review Policy (Task 3.3)
+# Instructs the reviewer (e.g. CodeRabbit) to check for Spec Alignment and Security.
+
+reviews:
+  path_instructions:
+    - path: "src/**"
+      instructions: |
+        This is Project Chimera, an autonomous influencer system. Before approving:
+        1. Spec Alignment: Verify that code aligns with specs/ (specs/technical.md API contracts, specs/functional.md user stories). New behaviour MUST have a corresponding requirement or contract in specs/. If the change implements a skill, check skills/*/README.md for the I/O contract.
+        2. Security: Flag hardcoded secrets, credentials, or API keys. Ensure sensitive config comes from environment or secrets manager. Check for unsafe deserialization or injection risks.
+    - path: "skills/**"
+      instructions: |
+        Skills are capability packages with defined I/O contracts. Verify:
+        1. Spec Alignment: Implementation matches the contract in the skill's README.md and specs/technical.md (e.g. Trend Data schema for fetch_trends).
+        2. Security: No secrets in code; validate and sanitize inputs.
+    - path: "tests/**"
+      instructions: |
+        Tests define the "empty slot" for TDD. Verify tests reference specs (e.g. API contract, trend data structure) and do not introduce unnecessary implementation detail. Security: tests must not contain real credentials or secrets.
