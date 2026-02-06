@@ -1,0 +1,45 @@
+---
+description: Project Chimera context, Prime Directive, and traceability for AI agents
+alwaysApply: true
+---
+
+# Project Chimera: Context & Governance
+
+Rules in this file define how the IDE's AI Agent (co-pilot) must behave when working in this repository.
+
+---
+
+## Project Context
+
+**This is Project Chimera, an autonomous influencer system.**
+
+It is an Agentic Infrastructure project (AiQEM) that builds Autonomous AI Influencers—digital entities that research trends, generate content, and manage engagement. The system uses Spec-Driven Development (SDD), the FastRender Swarm (Planner / Worker / Judge), and MCP for all external I/O. The repository is the "factory" that will eventually be built by a swarm of AI agents with minimal human conflict.
+
+---
+
+## The Prime Directive
+
+**NEVER generate code without checking specs/ first.**
+
+- Intent and contracts live in `specs/`: `_meta.md`, `functional.md`, `technical.md`, and feature-specific specs under `specs/001-*`.
+- Before writing or changing implementation code, read the relevant spec (functional requirements, API contracts, database schema). If the spec is vague or missing, clarify or extend the spec before implementing.
+- Ambiguity in specs leads to agent hallucination; keep specs the single source of truth.
+
+---
+
+## Traceability
+
+**Explain your plan before writing code.**
+
+- When asked to implement a feature or fix, state which spec(s) and user story (or contract) you are implementing.
+- Reference specific sections (e.g. "Implementing A-2 from specs/functional.md and Task schema from specs/technical.md").
+- Distinguish between **Skills** (reusable functions/scripts the agent calls, e.g. in `skills/`) and **MCP Servers** (external bridges). Do not conflate them.
+- Commit messages and PR descriptions should reference spec artifacts where applicable.
+
+---
+
+## Co-pilot behavior summary
+
+1. **Context**: Assume Project Chimera (autonomous influencer system); resolve intent from `specs/` only.
+2. **Before code**: Check specs first; if unclear, clarify or extend the spec, then implement.
+3. **Before edits**: Briefly state your plan and which spec(s) you are following, then write or change code.
