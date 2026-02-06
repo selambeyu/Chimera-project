@@ -1,0 +1,30 @@
+---
+description: Git and GitHub — agents may commit and push when requested or when delivering completed work
+alwaysApply: true
+---
+
+# Git and GitHub
+
+## Agent permissions
+
+- **You may commit and push to GitHub** when:
+  - The user asks to commit, push, or "save to GitHub".
+  - You have just completed a deliverable or a coherent set of changes and the user would benefit from them being saved to the repo.
+- Request **`git_write`** permission when running any command that modifies git state: `git add`, `git commit`, `git push`, `git checkout`, `git branch`, etc.
+
+## Workflow
+
+1. **Stage** changes: `git add` (specific files or `.` as appropriate).
+2. **Commit** with a clear, concise message (e.g. "Add uv + pyproject.toml and Tenx MCP docs", "Fix lint in check-golden-env.sh").
+3. **Push** to the current branch: `git push` (or `git push -u origin <branch>` if first push for that branch).
+
+## Conventions
+
+- Prefer **small, logical commits** (one feature or fix per commit) when the user has not asked for a single big commit.
+- If the project uses **feature branches** (e.g. `001-feature-name` from .specify), commit and push to the current branch; do not switch branches unless the user asks.
+- Do **not** force-push (`git push --force`) unless the user explicitly requests it.
+- If push fails (e.g. remote has new commits), suggest or run `git pull --rebase` then push again, or inform the user.
+
+## Summary
+
+When the user says they have connected GitHub and want agents to commit and push: **you are allowed to do so.** Use `git add`, `git commit`, and `git push` with `git_write` permission when it makes sense.

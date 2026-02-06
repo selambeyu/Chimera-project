@@ -1,5 +1,5 @@
-# Project Chimera - encapsulated environment for tests and CI
-# Python 3.12; installs deps and runs tests
+# Project Chimera - encapsulated environment for governance (lint, security, tests)
+# Python 3.12; used by CI for reproducible lint + security + test runs
 
 FROM python:3.12-slim
 
@@ -10,11 +10,11 @@ COPY skills/ skills/
 COPY tests/ tests/
 COPY specs/ specs/
 
-# Install test deps (no application package required by challenge)
-RUN pip install --no-cache-dir pytest pytest-asyncio
+# Install dev deps: tests + lint + security
+RUN pip install --no-cache-dir pytest pytest-asyncio ruff "bandit[toml]"
 
 ENV PYTHONPATH=/app
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Default: run tests
-CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short"]
+# Governance: lint → security → tests (run automatically in CI)
+CMD ["sh", "-c", "ruff check skills/ tests/ && bandit -r skills/ -c pyproject.toml && python -m pytest tests/ -v --tb=short"]

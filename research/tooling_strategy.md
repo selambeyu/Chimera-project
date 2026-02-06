@@ -1,7 +1,7 @@
 # Tooling & Skills Strategy
 
-**Document**: Developer tools (MCP) and agent skills strategy  
-**Task**: 2.3 Tooling & Skills Strategy  
+**Document**: Developer tools (MCP) and agent skills strategy
+**Task**: 2.3 Tooling & Skills Strategy
 **Last updated**: 2025-02-04
 
 ---

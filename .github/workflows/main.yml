@@ -1,4 +1,4 @@
-# Project Chimera - CI: run tests on every push (Task 3.3)
+# Project Chimera - CI: lint, security, tests (Task 3.3 + Governance Pipeline)
 name: CI
 
 on:
@@ -8,7 +8,8 @@ on:
     branches: [main, master]
 
 jobs:
-  test:
+  governance:
+    name: Lint, security, tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,15 +24,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
 
-      - name: Run tests
+      - name: Spec check
+        run: make spec-check
+
+      - name: Lint (ruff)
+        run: make lint
+
+      - name: Security (bandit)
+        run: make security
+
+      - name: Tests
         run: make test
         env:
-          PYTHONPATH: src:.
+          PYTHONPATH: .
 
-  test-docker:
+  governance-docker:
+    name: Governance in Docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build and run tests in Docker
+      - name: Build and run lint + security + tests in Docker
         run: make test-docker

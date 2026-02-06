@@ -1,0 +1,27 @@
+# Pre-commit hooks for Project Chimera
+# Install: pre-commit install
+# Run manually: pre-commit run --all-files
+# See https://pre-commit.com
+
+default_language_version:
+  python: python3.12
+
+repos:
+  # General file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=1000"]
+      - id: check-merge-conflict
+      - id: debug-statements
+
+  # Lint (uses [tool.ruff] from pyproject.toml)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.0
+    hooks:
+      - id: ruff
+        args: ["--fix"]

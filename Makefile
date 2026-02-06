@@ -1,7 +1,7 @@
 # Project Chimera - standardised commands (Task 3.2)
-# make setup | make test | make spec-check
+# make setup | make test | make spec-check | make lint | make security | make governance
 
-.PHONY: setup test spec-check lint
+.PHONY: setup test spec-check lint security governance test-docker
 
 # Install dependencies (local)
 setup:
@@ -26,7 +26,14 @@ spec-check:
 	@grep -q "Trend Data" specs/technical.md && echo "  OK Trend Data contract in technical.md" || (echo "  MISSING Trend Data in technical.md"; exit 1)
 	@echo "  Spec check passed."
 
-# Lint (optional)
+# Lint (ruff): skills/ and tests/
 lint:
-	python -m py_compile src/chimera/__init__.py 2>/dev/null || true
-	@echo "  Add ruff/black to pyproject.toml for full linting."
+	ruff check skills/ tests/
+
+# Security (bandit): skills/ only (tests may use assert)
+security:
+	bandit -r skills/ -c pyproject.toml
+
+# Governance pipeline: lint + security + tests (run automatically in CI and Docker)
+governance: spec-check lint security test
+	@echo "=== Governance passed ==="
